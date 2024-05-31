@@ -43,5 +43,5 @@ def main():
             f.write(new_content)
 
 
-if __name__ == 'main':
+if __name__ == '__main__':
     main()
