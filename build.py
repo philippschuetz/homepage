@@ -25,7 +25,6 @@ def main():
             continue
         relative_path = file.relative_to(CONTENT_DIR)
         Path(DESTINATION_DIR, relative_path.parent).mkdir(parents=True, exist_ok=True)
-        new_content = open(file).read()
         if file.suffix == '.html':
             # search & replace html content
             new_content = HTML_TEMPLATE.replace(PLACEHOLDER_CONTENT, open(file).read())
@@ -40,10 +39,11 @@ def main():
                     old = f'{PLACEHOLDER_TEMPLATES_PREFIX}{tmp_file.stem}{PLACEHOLDER_TEMPLATES_SUFFIX}'
                     new_content = new_content.replace(old, open(tmp_file).read())
 
-        # write content to file
-        with open(Path(DESTINATION_DIR, relative_path), 'w') as f:
-            f.write(new_content)
-
+            # write content to file
+            with open(Path(DESTINATION_DIR, relative_path), 'w') as f:
+                f.write(new_content)
+        else:
+            Path(DESTINATION_DIR, relative_path).write_bytes(file.read_bytes())
 
 if __name__ == '__main__':
     main()
