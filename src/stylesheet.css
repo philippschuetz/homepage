@@ -8,5 +8,6 @@
 body {
     font-family: sans-serif;
     padding: 5vh 10vw;
+    min-font-size: 12px;
     font-size: large;
 }
